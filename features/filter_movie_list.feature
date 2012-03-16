@@ -20,13 +20,16 @@ Background: movies have been added to database
   | Chicken Run             | G      | 21-Jun-2000  |
 
   And  I am on the RottenPotatoes home page
+  #And I checked following ratings: PG, R
   
 Scenario: restrict to movies with 'PG' or 'R' ratings
- When I check "ratings[PG]"
-  And I check "ratings[R]"
-  And I uncheck "ratings[PG-13]"
-  And I uncheck "ratings[NC-17]"
-  And I uncheck "ratings[G]"
+     When I check the following ratings: PG, R
+     #When I check "ratings[PG]"
+     #And I check "ratings[R]"
+     #And I uncheck the following ratings: NC-17, PG-13, G
+     #And I uncheck "ratings[PG-13]"
+     #And I uncheck "ratings[NC-17]"
+     #And I uncheck "ratings[G]"
   And I press "Refresh"
  Then I should see "The Terminator"
   And I should see "When Harry Met Sally"
@@ -46,6 +49,12 @@ Scenario: restrict to movies with 'PG' or 'R' ratings
 
 Scenario: no ratings selected
   # see assignment
+  When  I uncheck the following ratings: PG, G, R, PG-13, NC-17
+  Then I should not see all of the movies
+
 
 Scenario: all ratings selected
-  # see assignment
+  When  I check the following ratings: PG, G, R, PG-13, NC-17
+  Then I should see all of the movies
+
+ # see assignment
