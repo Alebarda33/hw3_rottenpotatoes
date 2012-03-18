@@ -22,8 +22,12 @@ Background: movies have been added to database
   And I am on the RottenPotatoes home page
 
 Scenario: sort movies alphabetically
+  When I follow "title_header"
+  Then I should see "Aladdin" before "Amelie"
   # your steps here
 
 Scenario: sort movies in increasing order of release date
+  When I follow "Release Date"
+  Then I should see "Chicken Run" before "Chocolat"
   # your steps here
 
