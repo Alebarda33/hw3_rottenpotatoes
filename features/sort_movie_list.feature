@@ -23,11 +23,15 @@ Background: movies have been added to database
 
 Scenario: sort movies alphabetically
   When I follow "title_header"
+  And I check the following ratings: PG, G, PG-13, R
+  And I press "Refresh"
   Then I should see "Aladdin" before "Amelie"
   # your steps here
 
 Scenario: sort movies in increasing order of release date
   When I follow "Release Date"
+  And I check the following ratings: PG, G, PG-13, R
+  And I press "Refresh"
   Then I should see "Chicken Run" before "Chocolat"
   # your steps here
 

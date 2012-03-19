@@ -15,7 +15,12 @@ end
 Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.content  is the entire content of the page as a string.
-  page.body =~ /e1.+e2/
+  #puts page.body
+  #puts Movie.count
+  e1_idx = page.body.index(e1)
+  e2_idx = page.body.index(e2)
+  #debugger
+  assert(e1_idx < e2_idx, "order wrong")
 end
 
 # Make it easier to express checking or unchecking several boxes at once
@@ -37,6 +42,7 @@ end
 
 Then /I should( not)? see all of the movies/ do |negate|
   expectation = negate ? 0 : Movie.count 
-  page.all("table#movies tr").count == expectation
-  
+  got = page.all("table#movies tr").count-1 # one row subtracted because of header has same <tr> tag
+  #puts page.body
+  assert(got== expectation, "Wrong number of rows: expected #{expectation}, got #{got}")
 end
