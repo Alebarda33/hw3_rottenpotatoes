@@ -46,3 +46,9 @@ Then /I should( not)? see all of the movies/ do |negate|
   #puts page.body
   assert(got== expectation, "Wrong number of rows: expected #{expectation}, got #{got}")
 end
+
+Then /the director of "(.*)" should be "(.*)"/ do |title, director|
+  #step %Q{I am on the Details of "#{title} page }
+  fact_director = Movie.find_by_title(title).director
+  assert(fact_director == director, "Wrong value of 'director' field!.")
+end
